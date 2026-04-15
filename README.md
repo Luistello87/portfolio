@@ -11,7 +11,7 @@ This repository contains the source code for my personal portfolio web page. I a
 Here, you'll find an outline of my:
 - **Technical Skills**: Java, Python, C#, SQL, Cloud Infrastructure, and more.
 - **Projects**: From full-stack applications to Learning Management Systems (LMS) and extensive database design work.
-- **Education & Credentials**: Academic history and IT certifications.
+- **Education & Credentials**: Academic history.
 
 ## Deployment
 This website is hosted completely statically using **GitHub Pages**. All changes pushed to the `main` branch are automatically deployed.
