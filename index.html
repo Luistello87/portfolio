@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luis Tello | Software Developer & Computer Programming Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1626;
+      --bg3: #151e30;
+      --card: #111827;
+      --border: rgba(255,255,255,0.07);
+      --accent: #00d4aa;
+      --accent2: #3b82f6;
+      --accent3: #f59e0b;
+      --text: #e8edf5;
+      --muted: #8892a4;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 68px;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--muted); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      text-decoration: none;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent) !important;
+      padding: 0.4rem 1.1rem;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--bg) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 4rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 68px;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -300px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    #home::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 32px; height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--bg3);
+      letter-spacing: 0.05em;
+    }
+
+    .chip.accent { border-color: rgba(0,212,170,0.3); color: var(--accent); background: rgba(0,212,170,0.05); }
+    .chip.blue { border-color: rgba(59,130,246,0.3); color: var(--accent2); background: rgba(59,130,246,0.05); }
+    .chip.gold { border-color: rgba(245,158,11,0.3); color: var(--accent3); background: rgba(245,158,11,0.05); }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 5px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0e1a;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover { background: #00ebb9; transform: translateY(-1px); box-shadow: 0 8px 25px rgba(0,212,170,0.25); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-avatar {
+      width: 280px; height: auto;
+      border-radius: 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hero-avatar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,170,0.1) 0%, rgba(59,130,246,0.05) 100%);
+    }
+
+    .hero-avatar-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-avatar-inner span:last-child {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-top: 1.5rem;
+    }
+
+    .status-dot::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 4rem;
+    }
+
+    /* ── SKILLS SECTION ── */
+    #skills { background: var(--bg2); }
+
+    .skills-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .skills-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(0,212,170,0.3);
+      transform: translateY(-2px);
+    }
+
+    .skill-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+    }
+
+    /* RESUME DOWNLOAD CARD */
+    .resume-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .resume-card-text h3 { margin-bottom: 0.4rem; }
+    .resume-card-text p { color: var(--muted); font-size: 0.9rem; }
+
+    /* ── WORK SAMPLES ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover { border-color: rgba(0,212,170,0.25); transform: translateY(-3px); }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-card.featured { grid-column: 1 / -1; }
+    .project-card.featured::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+    .project-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .project-card h3 { margin-bottom: 0.5rem; }
+
+    .project-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stack-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.2rem 0.55rem;
+      background: rgba(0,212,170,0.07);
+      border: 1px solid rgba(0,212,170,0.2);
+      border-radius: 3px;
+      color: var(--accent);
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent2);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: gap 0.2s;
+    }
+
+    .github-link:hover { gap: 0.65rem; }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg2); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: border-color 0.3s;
+    }
+
+    .edu-card:hover { border-color: rgba(0,212,170,0.3); }
+
+    .edu-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .edu-icon {
+      width: 44px; height: 44px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .edu-card h3 { font-size: 1.05rem; margin-bottom: 0.2rem; }
+    .edu-institution { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.05em; }
+    .edu-period { font-size: 0.82rem; color: var(--muted); margin-top: 0.25rem; }
+    .edu-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-top: 0.75rem; }
+
+    .edu-placeholder {
+      background: var(--bg3);
+      border: 2px dashed rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .awards-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+      grid-column: 1 / -1;
+    }
+
+    .award-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .award-chip-icon { font-size: 1.3rem; }
+
+    /* ── LEADERSHIP ── */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .leadership-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .leadership-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .leadership-org {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .leadership-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-left strong { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.25s; }
+    .fade-in:nth-child(3) { animation-delay: 0.4s; }
+    .fade-in:nth-child(4) { animation-delay: 0.55s; }
+
+    /* GRID LINES */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      nav ul { gap: 1.25rem; }
+      section { padding: 5rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-avatar { display: none; }
+      .skills-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: auto; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .awards-row { grid-template-columns: 1fr; }
+      .leadership-grid { grid-template-columns: 1fr; }
+      .resume-card { flex-direction: column; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav>
+    <a class="nav-logo" href="#home">luis<span>.tello</span></a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#skills">Skills & Resume</a></li>
+      <li><a href="#work">Work Samples</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="https://github.com/Luistello87" target="_blank" class="nav-cta">GitHub ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO / PROFILE ── -->
+  <section id="home">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-tag fade-in">Computer Programming · George Brown Polytechnic</p>
+          <h1 class="fade-in">
+            Luis <em>Tello</em><br>
+            Software<br>Developer
+          </h1>
+          <p class="hero-bio fade-in">
+            I am a final-year Computer Programming student at George Brown Polytechnic with a passion for full-stack development and database administration. My technical journey is defined by a <strong style="color:var(--text)">"fixer" mindset</strong>, combining analytical problem-solving with hands-on expertise in Java, Python, and SQL. As the Lead Coordinator for a major LMS Capstone project, I have proven my ability to guide Agile teams and deliver robust software solutions. I am committed to continuous learning.
+          </p>
+          <div class="hero-chips fade-in">
+            <span class="chip accent">Full-Stack Development</span>
+            <span class="chip blue">Database Administration</span>
+            <span class="chip gold">Agile / Scrum Lead</span>
+            <span class="chip">🗣 Bilingual EN / ES</span>
+            <span class="chip">🚗 Full Ontario G License</span>
+          </div>
+          <div class="hero-ctas fade-in">
+            <a href="#work" class="btn btn-primary">View My Work →</a>
+            <a href="https://github.com/Luistello87" target="_blank" class="btn btn-outline">github.com/Luistello87</a>
+          </div>
+          <div class="status-dot fade-in">Available · Expected Graduation May 2026</div>
+        </div>
+        <div class="hero-avatar">
+          <img src="docs/LT.jpeg" alt="Luis Tello" style="width: 100%; height: auto; display: block;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SKILLS & RESUME ── -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">02 — Skills & Resume</p>
+      <h2>Technical Arsenal</h2>
+
+      <div class="skills-intro">
+        <p class="skills-desc">
+          My stack is built around Java and Python for backend systems, SQL for data-heavy applications, and modern frameworks like Spring Boot and Angular for full-stack delivery. I bridge software with infrastructure, holding foundational knowledge in Linux Essentials, Microsoft Azure, and CI/CD with GitHub Actions — skills shaped by real project delivery, not just coursework.
+        </p>
+        <div></div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-icon">⚙️</div>
+          <h4>Languages</h4>
+          <div class="tag-cloud">
+            <span class="tag">Java</span>
+            <span class="tag">Python</span>
+            <span class="tag">C#</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Bash Scripting</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-icon">🛠</div>
+          <h4>Frameworks & Tools</h4>
+          <div class="tag-cloud">
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Angular</span>
+            <span class="tag">Ionic</span>
+            <span class="tag">Git</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">Agile/Scrum</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-icon">🗄</div>
+          <h4>Database & Admin</h4>
+          <div class="tag-cloud">
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Oracle DB</span>
+            <span class="tag">Relational Design</span>
+            <span class="tag">ERD Modeling</span>
+            <span class="tag">Shell Scripting</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-icon">☁️</div>
+          <h4>Cloud & DevOps</h4>
+          <div class="tag-cloud">
+            <span class="tag">Microsoft Azure</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">CI/CD Pipelines</span>
+            <span class="tag">Linux Essentials</span>
+            <span class="tag">IT Essentials</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-card">
+        <div class="resume-card-text">
+          <h3>Full Resume</h3>
+          <p>Simple, linear format · Customized for full-stack & database administration roles</p>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="docs/LuisTelloResume.pdf" target="_blank" class="btn btn-primary" style="text-decoration:none;">📄 My Resume System</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── WORK SAMPLES ── -->
+  <section id="work">
+    <div class="container">
+      <p class="section-label">03 — Work Samples & GitHub</p>
+      <h2>Projects & Deliverables</h2>
+      <p style="color:var(--muted);max-width:540px;margin-bottom:0.5rem;">
+        A selection of academic and personal projects demonstrating full-stack capability, database design, and team leadership. All source code available on GitHub.
+      </p>
+      <a href="https://github.com/Luistello87" target="_blank" class="github-link" style="margin-bottom:0;display:inline-flex;">
+        ⬡ github.com/Luistello87 →
+      </a>
+
+      <div class="projects-grid">
+
+        <!-- FEATURED: LMS Capstone -->
+        <div class="project-card featured">
+          <div class="project-number">01 · CAPSTONE PROJECT</div>
+          <h3>OZARK LMS (Learning Management System)</h3>
+          <p class="project-role">Lead Coordinator · Team of 5</p>
+          <p class="project-desc">
+            A comprehensive Learning Management System built over multiple academic terms. As Lead Coordinator, I defined the project roadmap, managed sprint planning and retrospectives using Agile/Scrum methodology, delegated module ownership across a team of five developers, and maintained documentation standards. The system integrates AI APIs for intelligent content workflows and was built on a cross-platform mobile framework, delivering a production-ready LMS with role-based access, course management, and progress tracking.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Ionic</span>
+            <span class="stack-tag">AI APIs</span>
+            <span class="stack-tag">Agile/Scrum</span>
+            <span class="stack-tag">GitHub Actions</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">REST APIs</span>
+          </div>
+          <a href="https://github.com/Luistello87" target="_blank" class="github-link">⬡ View on GitHub →</a>
+        </div>
+
+        <!-- Project Manager Web App -->
+        <div class="project-card">
+          <div class="project-number">02 · FULL-STACK APP</div>
+          <h3>Project Management Web App</h3>
+          <p class="project-role">Solo Developer</p>
+          <p class="project-desc">
+            A full-stack project management system featuring high-performance data retrieval, backend optimization, and a clean dashboard interface. Deployed end-to-end with emphasis on relational integrity and query optimization.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">C#</span>
+            <span class="stack-tag">PostgreSQL</span>
+            <span class="stack-tag">ASP.NET</span>
+            <span class="stack-tag">Azure</span>
+          </div>
+          <a href="https://github.com/Luistello87" target="_blank" class="github-link">⬡ View on GitHub →</a>
+        </div>
+
+        <!-- Language Learning App -->
+        <div class="project-card">
+          <div class="project-number">03 · MOBILE APP</div>
+          <h3>Language Learning App</h3>
+          <p class="project-role">Developer</p>
+          <p class="project-desc">
+            A bilingual learning application featuring a tap-to-translate interface allowing users to interact with any on-screen text instantly. Integrates embedded video content for immersive lesson delivery and context-driven vocabulary acquisition.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">Ionic</span>
+            <span class="stack-tag">Translation API</span>
+            <span class="stack-tag">Video Integration</span>
+          </div>
+          <a href="https://github.com/Luistello87" target="_blank" class="github-link">⬡ View on GitHub →</a>
+        </div>
+
+        <!-- Database Design -->
+        <div class="project-card">
+          <div class="project-number">04 · DATABASE DESIGN</div>
+          <h3>Database Administration Projects</h3>
+          <p class="project-role">Database Administration Coursework</p>
+          <p class="project-desc">
+            A series of relational database projects covering ERD modeling, normalization, Oracle DB and PostgreSQL administration, and automated shell scripting for database maintenance. Includes schema designs, stored procedures, and query optimization exercises.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Oracle DB</span>
+            <span class="stack-tag">PostgreSQL</span>
+            <span class="stack-tag">ERD Modeling</span>
+            <span class="stack-tag">SQL</span>
+            <span class="stack-tag">Bash</span>
+          </div>
+          <div style="margin-top:1rem;background:var(--bg3);border:2px dashed rgba(255,255,255,0.1);border-radius:6px;padding:0.75rem 1rem;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);">
+            📷 Upload ERD screenshots / SQL schema images here
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── EDUCATION & ACKNOWLEDGEMENTS ── -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">04 — Education & Acknowledgements</p>
+      <h2>Credentials & Background</h2>
+
+      <div class="edu-grid">
+
+        <div class="edu-card">
+          <div class="edu-card-header">
+            <div class="edu-icon">🎓</div>
+            <div>
+              <h3>Computer Programming Diploma</h3>
+              <p class="edu-institution">George Brown Polytechnic</p>
+              <p class="edu-period">Expected Graduation · May 2026</p>
+            </div>
+          </div>
+          <p class="edu-desc">
+            Advanced studies in full-stack development, database administration, cloud computing, software engineering principles, and Agile project management. Specializations in Java, Python, C#, and enterprise database systems.
+          </p>
+          <div class="edu-placeholder">📄 Comming soon!</div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-card-header">
+            <div class="edu-icon">🏗</div>
+            <div>
+              <h3>Home Renovation & Construction Certificate</h3>
+              <p class="edu-institution">York Construction Academy</p>
+              <p class="edu-period">Completed</p>
+            </div>
+          </div>
+          <p class="edu-desc">
+            Formal training in structural principles, project planning, and construction management. This disciplined, architecture-first mindset directly informs how I approach software systems design — building to spec, with attention to load, structure, and maintainability.
+          </p>
+          <div class="edu-placeholder">
+            <a href="docs/Construction%20Technology%20Program.pdf" target="_blank" style="color:inherit; text-decoration:none;">📄 Construction Technology Program</a>
+          </div>
+        </div>
+
+        <!-- Professional Certifications row -->
+        <div class="awards-row">
+          <div class="award-chip">
+            <span class="award-chip-icon">🏅</span>
+            <div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;">Linux Essentials</div>
+              <div style="font-size:0.78rem;color:var(--muted);">Foundational knowledge</div>
+            </div>
+          </div>
+          <div class="award-chip">
+            <span class="award-chip-icon">🏅</span>
+            <div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;">IT Essentials</div>
+              <div style="font-size:0.78rem;color:var(--muted);">Hardware & Networking</div>
+            </div>
+          </div>
+          <div class="award-chip">
+            <span class="award-chip-icon">🚗</span>
+            <div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;">Full Ontario G License</div>
+              <div style="font-size:0.78rem;color:var(--muted);">Professional Asset</div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Letters of Recommendation -->
+        <div style="grid-column: 1 / -1; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem;">
+          <h3 style="margin-bottom:0.5rem;">Letters of Recommendation</h3>
+          <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem;">Professional and academic endorsements.</p>
+          <div class="edu-placeholder">
+            <a href="docs/St.Jude%20Church.pdf" target="_blank" style="color:inherit; text-decoration:none;">📄 St.Jude Church</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Community & Leadership -->
+      <div style="margin-top:4rem;">
+        <p class="section-label">Community & Leadership</p>
+        <h2 style="font-size:1.6rem;">Beyond the Code</h2>
+        <div class="leadership-grid">
+          <div class="leadership-card">
+            <h4>Youth Professor</h4>
+            <p class="leadership-org">Iglesia Evangelica Hispana</p>
+            <p class="leadership-desc">Mentor to diverse youth groups, translating complex technical and life concepts into accessible lessons. Demonstrates communication, patience, and cross-cultural fluency.</p>
+          </div>
+          <div class="leadership-card">
+            <h4>First-Line Volunteer</h4>
+            <p class="leadership-org">St. Jude's (Wexford) Anglican Church · COVID-19 Response</p>
+            <p class="leadership-desc">Managed high-pressure community operations and essential documentation during the pandemic, demonstrating operational resilience and leadership under uncertainty.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-left">
+      <strong>Luis Tello</strong> · luis.tellosal@gmail.com · Computer Programming, George Brown Polytechnic
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/Luistello87" target="_blank">GitHub</a>
+      <a href="#home">Back to Top ↑</a>
+    </div>
+  </footer>
+
+</body>
+</html>
